@@ -1,5 +1,5 @@
 <template>
-    <main></main>
+    <main class="py-4 bg-testus">lorem</main>
 </template>
 
 <script lang="ts">
