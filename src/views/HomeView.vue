@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts">
-import { useStore } from "vuex";
-
-export default {};
+export default {
+    setup() {},
+};
 </script>
 
 <style lang="scss" scoped></style>
