@@ -3,6 +3,7 @@
     <loading v-if="isLoading" :isLoading="isLoading" />
     <main v-if="!isLoading" class="min-h-screen bg-ct-black animate-expand" ref="mainWrapper">
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
+        <router-view />
     </main>
 </template>
 
@@ -17,11 +18,15 @@ import type NatureImage from "./types/NatureImage";
 import Error from "./components/popups/Error.vue";
 import Loading from "./components/loaders/Loading.vue";
 
+// views
+import LoginView from "./views/LoginView.vue";
+
 export default defineComponent({
     name: "App",
     components: {
         Error,
         Loading,
+        LoginView,
     },
     setup() {
         // refs
