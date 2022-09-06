@@ -1,7 +1,11 @@
 <template>
     <!-- App -->
     <loading v-if="isLoading" :isLoading="isLoading" />
-    <main v-if="!isLoading" class="min-h-screen bg-ct-black animate-expand" ref="mainWrapper">
+    <main
+        v-if="!isLoading"
+        class="min-h-screen bg-ct-black animate-expand bg-no-repeat bg-cover"
+        ref="mainWrapper"
+    >
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
         <router-view />
     </main>

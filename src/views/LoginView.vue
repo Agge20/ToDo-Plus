@@ -1,7 +1,7 @@
 <template>
     <!-- Login view -->
     <section>
-        <heading :text="'Hello'" :size="'h1'" />
+        <heading :text="'Hello'" :size="'h2'" />
     </section>
 </template>
 

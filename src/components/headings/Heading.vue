@@ -1,8 +1,23 @@
 <template>
     <!-- Header three component -->
-    <h2 class="text-ct-white" :class="[headingSize]">
+    <h1 v-if="size === 'h1'" class="text-ct-white" :class="[headingSize]">
+        {{ text }}
+    </h1>
+    <h2 v-else-if="size === 'h2'" class="text-ct-white" :class="[headingSize]">
         {{ text }}
     </h2>
+    <h3 v-else-if="size === 'h3'" class="text-ct-white" :class="[headingSize]">
+        {{ text }}
+    </h3>
+    <h4 v-else-if="size === 'h4'" class="text-ct-white" :class="[headingSize]">
+        {{ text }}
+    </h4>
+    <h5 v-else-if="size === 'h5'" class="text-ct-white" :class="[headingSize]">
+        {{ text }}
+    </h5>
+    <h6 v-else-if="size === 'h6'" class="text-ct-white" :class="[headingSize]">
+        {{ text }}
+    </h6>
 </template>
 
 <script lang="ts">
