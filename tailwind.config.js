@@ -9,6 +9,7 @@ module.exports = {
                 "ct-red": "#EA3939",
                 "ct-white": "#FFFFFF",
                 "ct-black": "#1E1E1E",
+                "ct-light-gray": "#F5F5F5",
             },
             fontFamily: {
                 inter: ["Inter"],
@@ -19,9 +20,17 @@ module.exports = {
                     "50%": { opacity: 1 },
                     "100%": { transform: "scale(1)" },
                 },
+                grow: {
+                    "0%": { transform: "scale(1)" },
+                    "100%": { transform: "scale(1.05)" },
+                },
             },
             animation: {
                 expand: "expand 0.5s ease-out forwards",
+                grow: "grow 0.2s ease-out forwards",
+            },
+            maxWidth: {
+                "90vw": "90vw",
             },
         },
     },

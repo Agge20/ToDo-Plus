@@ -1,8 +1,9 @@
 <template>
-    <!-- error popup component -->
-    <div class="flex items-center justify-center p-8">
-        <p class="animate-expand rounded-2xl bg-ct-red p-8 text-ct-white">{{ message }}</p>
-    </div>
+    <button
+        class="mt-8 w-80 max-w-full rounded-lg bg-ct-green p-3 text-xl text-white hover:animate-grow hover:shadow-lg"
+    >
+        {{ text }}
+    </button>
 </template>
 
 <script lang="ts">
@@ -11,7 +12,7 @@
 
     export default defineComponent({
         props: {
-            message: {
+            text: {
                 required: true,
                 type: String as PropType<string>,
             },

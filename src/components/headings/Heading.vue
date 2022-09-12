@@ -1,70 +1,79 @@
 <template>
     <!-- Header three component -->
-    <h1 v-if="size === 'h1'" class="text-ct-white" :class="[headingSize]">
+    <h1 v-if="size === 'h1'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h1>
-    <h2 v-else-if="size === 'h2'" class="text-ct-white" :class="[headingSize]">
+    <h2 v-else-if="size === 'h2'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h2>
-    <h3 v-else-if="size === 'h3'" class="text-ct-white" :class="[headingSize]">
+    <h3 v-else-if="size === 'h3'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h3>
-    <h4 v-else-if="size === 'h4'" class="text-ct-white" :class="[headingSize]">
+    <h4 v-else-if="size === 'h4'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h4>
-    <h5 v-else-if="size === 'h5'" class="text-ct-white" :class="[headingSize]">
+    <h5 v-else-if="size === 'h5'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h5>
-    <h6 v-else-if="size === 'h6'" class="text-ct-white" :class="[headingSize]">
+    <h6 v-else-if="size === 'h6'" class="text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h6>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import type { PropType } from "vue";
+    import { defineComponent, ref } from "vue";
+    import type { PropType } from "vue";
 
-// type
-import type Heading from "../../types/Heading";
+    // type
+    import type Heading from "../../types/Heading";
 
-export default defineComponent({
-    props: {
-        text: {
-            required: true,
-            type: String as PropType<string>,
+    export default defineComponent({
+        props: {
+            text: {
+                required: true,
+                type: String as PropType<string>,
+            },
+            size: {
+                required: true,
+                type: String as PropType<Heading>,
+            },
+            colorLight: {
+                required: true,
+                type: Boolean as PropType<boolean>,
+            },
         },
-        size: {
-            required: true,
-            type: String as PropType<Heading>,
+        setup(props) {
+            let headingSize = ref<string>();
+            let headingClasses = ref<object>();
+
+            switch (props.size) {
+                case "h1":
+                    headingSize.value = "text-9xl";
+                    break;
+                case "h2":
+                    headingSize.value = "text-8xl";
+                    break;
+                case "h3":
+                    headingSize.value = "text-6xl";
+                    break;
+                case "h4":
+                    headingSize.value = "text-4xl font-medium";
+                    break;
+                case "h5":
+                    headingSize.value = "text-3xl";
+                    break;
+                case "h6":
+                    headingSize.value = "text-3xl";
+                    break;
+            }
+
+            let headingColor = props.colorLight ? "text-ct-white" : "text-ct-black";
+
+            headingClasses.value = [headingSize.value, headingColor];
+
+            return {
+                headingClasses,
+            };
         },
-    },
-    setup(props) {
-        let headingSize = ref();
-
-        switch (props.size) {
-            case "h1":
-                headingSize.value = "text-9xl";
-                break;
-            case "h2":
-                headingSize.value = "text-8xl";
-                break;
-            case "h3":
-                headingSize.value = "text-6xl";
-                break;
-            case "h4":
-                headingSize.value = "text-4xl";
-                break;
-            case "h5":
-                headingSize.value = "text-3xl";
-                break;
-            case "h6":
-                headingSize.value = "text-3xl";
-                break;
-        }
-
-        return {
-            headingSize,
-        };
-    },
-});
+    });
 </script>
