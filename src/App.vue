@@ -6,8 +6,9 @@
         class="min-h-screen animate-expand bg-ct-black bg-cover bg-no-repeat"
         ref="mainWrapper"
     >
+        <gradient />
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
-        <router-view />
+        <router-view class="relative z-20" />
     </main>
 </template>
 
@@ -21,6 +22,7 @@
     // components
     import Error from "./components/popups/Error.vue";
     import Loading from "./components/loaders/Loading.vue";
+    import Gradient from "./components/Gradient.vue";
 
     // views
     import LoginView from "./views/LoginView.vue";
@@ -31,6 +33,7 @@
             Error,
             Loading,
             LoginView,
+            Gradient,
         },
         setup() {
             // refs
@@ -71,8 +74,7 @@
                     return (natureImage.value = data);
                 };
 
-                //getNatureImage();
-                isLoading.value = false;
+                getNatureImage();
             });
 
             watchEffect(() => {

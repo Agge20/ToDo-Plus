@@ -1,21 +1,21 @@
 <template>
     <!-- Header three component -->
-    <h1 v-if="size === 'h1'" class="text-ct-white" :class="[headingClasses]">
+    <h1 v-if="size === 'h1'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h1>
-    <h2 v-else-if="size === 'h2'" class="text-ct-white" :class="[headingClasses]">
+    <h2 v-else-if="size === 'h2'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h2>
-    <h3 v-else-if="size === 'h3'" class="text-ct-white" :class="[headingClasses]">
+    <h3 v-else-if="size === 'h3'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h3>
-    <h4 v-else-if="size === 'h4'" class="text-ct-white" :class="[headingClasses]">
+    <h4 v-else-if="size === 'h4'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h4>
-    <h5 v-else-if="size === 'h5'" class="text-ct-white" :class="[headingClasses]">
+    <h5 v-else-if="size === 'h5'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h5>
-    <h6 v-else-if="size === 'h6'" class="text-ct-white" :class="[headingClasses]">
+    <h6 v-else-if="size === 'h6'" class="m-4 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h6>
 </template>
@@ -48,22 +48,22 @@
 
             switch (props.size) {
                 case "h1":
-                    headingSize.value = "text-9xl";
+                    headingSize.value = "md:text-9xl text-6xl";
                     break;
                 case "h2":
-                    headingSize.value = "text-8xl";
+                    headingSize.value = "md:text-8xl text-4xl";
                     break;
                 case "h3":
-                    headingSize.value = "text-6xl";
+                    headingSize.value = "md:text-6xl text-3xl";
                     break;
                 case "h4":
-                    headingSize.value = "text-4xl font-medium";
+                    headingSize.value = "md:text-4xl font-medium text-2xl";
                     break;
                 case "h5":
-                    headingSize.value = "text-3xl";
+                    headingSize.value = "md:text-3xl text-1xl";
                     break;
                 case "h6":
-                    headingSize.value = "text-3xl";
+                    headingSize.value = "md:text-3xl text-lg";
                     break;
             }
 

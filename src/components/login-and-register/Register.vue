@@ -1,6 +1,6 @@
 <template>
     <!-- register -->
-    <div class="max-w-90vw rounded-2xl bg-ct-white p-8">
+    <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8">
         <heading :text="'Register'" :size="'h4'" :colorLight="false" />
         <form class="flex flex-col">
             <form-label :text="'Email'" :forId="'register-email'" />
