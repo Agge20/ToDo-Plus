@@ -46,6 +46,13 @@
 
     // vue imports
     import { defineComponent, ref, watchEffect, computed } from "vue";
+    import { useRouter } from "vue-router";
+
+    // composables
+    import injectStrict from "../../composables/injectStrict";
+
+    // types and interfaces
+    import StoreKey from "../../symbols/StoreSymbol";
 
     // components
     import FormLabel from "../form/FormLabel.vue";
@@ -61,6 +68,10 @@
             GreenButton,
         },
         setup() {
+            // vue router
+            const router = useRouter();
+            const store = injectStrict(StoreKey);
+
             const email = ref<string>("");
             const password = ref<string>("");
             const repeatedPassword = ref<string>("");
@@ -114,25 +125,23 @@
                 }
             };
 
-            const registerUser = (): boolean => {
-                let success: boolean = false;
-
+            const registerUser = (): void => {
                 createUserWithEmailAndPassword(auth, email.value, password.value)
                     .then((userCredential) => {
                         // Signed in
                         const user = userCredential.user;
+
+                        // if user has been registered save to store
+                        store.value.user = user;
+                        router.push("/");
+
                         // ...
-                        console.log("registered: ", user);
-                        success = true;
                     })
                     .catch((error) => {
                         const errorCode = error.code;
                         console.log(errorCode);
                         registerErrorMsg.value = error.message;
-                        success = false;
                     });
-
-                return success;
             };
 
             return {
