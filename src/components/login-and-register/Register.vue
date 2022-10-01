@@ -2,11 +2,12 @@
     <!-- register -->
     <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8">
         <heading :text="'Register'" :size="'h4'" :colorLight="false" />
-        <form class="flex flex-col">
+        <form class="flex flex-col" @submit.prevent="registerUser">
             <form-label :text="'Email'" :forId="'register-email'" />
             <form-input
                 :inputType="'email'"
                 :icon="'email'"
+                :errorMessage="registerErrorMsg"
                 id="register-email"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
@@ -32,12 +33,17 @@
                     'opacity-50': !correctValuesInputed,
                     'cursor-pointer': correctValuesInputed,
                 }"
+                type="submit"
             />
         </form>
     </div>
 </template>
 
 <script lang="ts">
+    // firebase imports
+    import { createUserWithEmailAndPassword } from "firebase/auth";
+    import { auth } from "../../firebase/firebase";
+
     // vue imports
     import { defineComponent, ref, watchEffect, computed } from "vue";
 
@@ -60,6 +66,7 @@
             const repeatedPassword = ref<string>("");
             const passwordNotMatchingMsg = ref<string>("");
             const correctValuesInputed = ref<boolean>(false);
+            const registerErrorMsg = ref<string>("");
 
             const passwordsAreMatching = computed(() => {
                 return (
@@ -79,6 +86,7 @@
             watchEffect(() => {
                 if (!passwordsAreMatching.value && repeatedPassword.value.length > 0) {
                     passwordNotMatchingMsg.value = "Password not matching";
+                    correctValuesInputed.value = false;
                 } else if (checkInputedValues.value) {
                     passwordNotMatchingMsg.value = "";
                     correctValuesInputed.value = true;
@@ -106,10 +114,33 @@
                 }
             };
 
+            const registerUser = (): boolean => {
+                let success: boolean = false;
+
+                createUserWithEmailAndPassword(auth, email.value, password.value)
+                    .then((userCredential) => {
+                        // Signed in
+                        const user = userCredential.user;
+                        // ...
+                        console.log("registered: ", user);
+                        success = true;
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        console.log(errorCode);
+                        registerErrorMsg.value = error.message;
+                        success = false;
+                    });
+
+                return success;
+            };
+
             return {
                 passwordNotMatchingMsg,
                 inputValueChange,
                 correctValuesInputed,
+                registerUser,
+                registerErrorMsg,
             };
         },
     });
