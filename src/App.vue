@@ -8,7 +8,9 @@
     >
         <gradient />
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
-        <router-view class="relative z-20" />
+        <store-provider>
+            <router-view class="relative z-20" />
+        </store-provider>
     </main>
 </template>
 
@@ -17,7 +19,10 @@
     import { defineComponent, ref, onMounted, watchEffect } from "vue";
 
     // types
-    import type NatureImage from "./types/NatureImage";
+    import type NatureImage from "./interfaces/NatureImage";
+
+    // providers
+    import StoreProvider from "./providers/StoreProvider.vue";
 
     // components
     import Error from "./components/popups/Error.vue";
@@ -34,6 +39,7 @@
             Loading,
             LoginView,
             Gradient,
+            StoreProvider,
         },
         setup() {
             // refs
