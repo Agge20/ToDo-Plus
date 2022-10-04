@@ -4,6 +4,7 @@
         <div class="relative flex items-center">
             <lock-icon v-if="icon === 'lock'" class="absolute left-2" />
             <email-icon v-if="icon === 'email'" class="absolute left-2" />
+            <user-icon v-if="icon === 'user'" class="absolute left-2" />
             <input
                 :type="inputType"
                 class="w-80 max-w-full rounded-lg border-2 bg-ct-light-gray p-2 indent-7 focus:outline-none"
@@ -31,6 +32,7 @@
     // icons
     import LockIcon from "../icons/LockIcon.vue";
     import EmailIcon from "../icons/EmailIcon.vue";
+    import UserIcon from "../icons/UserIcon.vue";
 
     export default defineComponent({
         props: {
@@ -49,6 +51,7 @@
         components: {
             LockIcon,
             EmailIcon,
+            UserIcon,
         },
         setup() {
             const inputValue = ref<string>("");

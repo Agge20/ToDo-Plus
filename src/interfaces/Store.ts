@@ -1,5 +1,5 @@
 interface Store {
-    user: object;
+    user: any;
 }
 
 export default Store;
