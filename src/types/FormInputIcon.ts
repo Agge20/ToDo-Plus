@@ -1,3 +1,3 @@
-type FormInputIcon = "lock" | "email";
+type FormInputIcon = "lock" | "email" | "user";
 
 export default FormInputIcon;

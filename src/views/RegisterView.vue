@@ -17,9 +17,6 @@
     // vue imports
     import { defineComponent, ref } from "vue";
 
-    // firebase imports
-    import { auth } from "../firebase/firebase";
-
     // components
     import Heading from "../components/headings/Heading.vue";
     import Register from "../components/login-and-register/Register.vue";
