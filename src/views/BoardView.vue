@@ -1,12 +1,16 @@
 <template>
     <section>
-        <welcome />
+        <welcome :username="username" />
     </section>
 </template>
 
 <script lang="ts">
     // vue imports
-    import { defineComponent } from "vue";
+    import { defineComponent, ref } from "vue";
+
+    // firebase imports
+    import { auth } from "../firebase/firebase";
+    import type { Auth } from "firebase/auth";
 
     // composables
     import injectStrict from "../composables/injectStrict";
@@ -22,9 +26,16 @@
         setup() {
             const store = injectStrict(StoreKey);
 
-            if (store.value.user) {
-                console.log(store.value.user.uid);
+            const user = ref<Auth>(auth);
+            let username = ref<string>("");
+
+            if (user.value.currentUser?.displayName) {
+                username.value = user.value.currentUser?.displayName;
             }
+
+            return {
+                username,
+            };
         },
     });
 </script>
