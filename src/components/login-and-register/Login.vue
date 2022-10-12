@@ -1,41 +1,41 @@
 <template>
-    <!-- register -->
-    <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8 lg:rounded-tl-none lg:rounded-bl-none">
-        <heading :text="'Register'" :size="'h4'" :colorLight="false" />
-        <form class="flex flex-col" @submit.prevent="registerUser">
-            <form-label :text="'Email'" :forId="'register-email'" />
+    <!-- login -->
+    <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8 lg:rounded-tr-none lg:rounded-br-none">
+        <heading :text="'login'" :size="'h4'" :colorLight="false" />
+        <form class="flex flex-col" @submit.prevent="loginUser">
+            <form-label :text="'Email'" :forId="'login-email'" />
             <form-input
                 :inputType="'email'"
                 :icon="'email'"
-                :errorMessage="registerErrorMsg"
-                id="register-email"
+                :errorMessage="loginErrorMsg"
+                id="login-email"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
-            <form-label :text="'Username'" :forId="'register-username'" />
+            <form-label :text="'Username'" :forId="'login-username'" />
             <form-input
                 :inputType="'user'"
                 :icon="'user'"
-                :errorMessage="registerErrorMsg"
-                id="register-username"
+                :errorMessage="loginErrorMsg"
+                id="login-username"
                 @input-value-change="(val) => inputValueChange(val, 'username')"
             />
-            <form-label :text="'Password'" :forId="'register-password'" />
+            <form-label :text="'Password'" :forId="'login-password'" />
             <form-input
                 :inputType="'password'"
                 :icon="'lock'"
-                id="register-password"
+                id="login-password"
                 @input-value-change="(val) => inputValueChange(val, 'password')"
             />
-            <form-label :text="'Repeat Password'" :forId="'register-repeat-password'" />
+            <form-label :text="'Repeat Password'" :forId="'login-repeat-password'" />
             <form-input
                 :inputType="'password'"
                 :icon="'lock'"
                 :errorMessage="passwordNotMatchingMsg"
-                id="register-repeat-password"
+                id="login-repeat-password"
                 @input-value-change="(val) => inputValueChange(val, 'repeated-password')"
             />
             <colored-button
-                :text="'Register'"
+                :text="'Login'"
                 :color="'green'"
                 :disabled="!correctValuesInputed"
                 :class="{
@@ -89,7 +89,7 @@
             const repeatedPassword = ref<string>("");
             const passwordNotMatchingMsg = ref<string>("");
             const correctValuesInputed = ref<boolean>(false);
-            const registerErrorMsg = ref<string>("");
+            const loginErrorMsg = ref<string>("");
 
             const passwordsAreMatching = computed(() => {
                 return (
@@ -140,13 +140,13 @@
                 }
             };
 
-            const registerUser = async () => {
+            const loginUser = async () => {
                 try {
                     let errorOccured = false;
                     await createUserWithEmailAndPassword(auth, email.value, password.value).catch(
                         (err: any) => {
                             errorOccured = true;
-                            registerErrorMsg.value = err;
+                            loginErrorMsg.value = err;
                         }
                     );
 
@@ -154,7 +154,7 @@
                         displayName: username.value,
                     }).catch((err: any) => {
                         errorOccured = true;
-                        registerErrorMsg.value = err;
+                        loginErrorMsg.value = err;
                     });
 
                     if (!errorOccured) {
@@ -162,7 +162,7 @@
                         router.push("/");
                     }
                 } catch (err: any) {
-                    registerErrorMsg.value = err;
+                    loginErrorMsg.value = err;
                 }
             };
 
@@ -170,8 +170,8 @@
                 passwordNotMatchingMsg,
                 inputValueChange,
                 correctValuesInputed,
-                registerUser,
-                registerErrorMsg,
+                loginUser,
+                loginErrorMsg,
             };
         },
     });
