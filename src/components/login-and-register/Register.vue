@@ -11,6 +11,14 @@
                 id="register-email"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
+            <form-label :text="'Username'" :forId="'register-username'" />
+            <form-input
+                :inputType="'user'"
+                :icon="'user'"
+                :errorMessage="registerErrorMsg"
+                id="register-username"
+                @input-value-change="(val) => inputValueChange(val, 'username')"
+            />
             <form-label :text="'Password'" :forId="'register-password'" />
             <form-input
                 :inputType="'password'"
@@ -41,7 +49,9 @@
 
 <script lang="ts">
     // firebase imports
-    import { createUserWithEmailAndPassword } from "firebase/auth";
+    import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+    import type { User } from "firebase/auth";
+
     import { auth } from "../../firebase/firebase";
 
     // vue imports
@@ -73,6 +83,7 @@
             const store = injectStrict(StoreKey);
 
             const email = ref<string>("");
+            const username = ref<string>("");
             const password = ref<string>("");
             const repeatedPassword = ref<string>("");
             const passwordNotMatchingMsg = ref<string>("");
@@ -110,11 +121,14 @@
             // handle input value changes
             const inputValueChange = (
                 val: string,
-                valToChange: "email" | "password" | "repeated-password"
+                valToChange: "email" | "password" | "repeated-password" | "username"
             ): void => {
                 switch (valToChange) {
                     case "email":
                         email.value = val;
+                        break;
+                    case "username":
+                        username.value = val;
                         break;
                     case "password":
                         password.value = val;
@@ -125,23 +139,30 @@
                 }
             };
 
-            const registerUser = (): void => {
-                createUserWithEmailAndPassword(auth, email.value, password.value)
-                    .then((userCredential) => {
-                        // Signed in
-                        const user = userCredential.user;
+            const registerUser = async () => {
+                try {
+                    let errorOccured = false;
+                    await createUserWithEmailAndPassword(auth, email.value, password.value).catch(
+                        (err: any) => {
+                            errorOccured = true;
+                            registerErrorMsg.value = err;
+                        }
+                    );
 
-                        // if user has been registered save to store
-                        store.value.user = user;
-                        router.push("/");
-
-                        // ...
-                    })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        console.log(errorCode);
-                        registerErrorMsg.value = error.message;
+                    await updateProfile(auth.currentUser as User, {
+                        displayName: username.value,
+                    }).catch((err: any) => {
+                        errorOccured = true;
+                        registerErrorMsg.value = err;
                     });
+
+                    if (!errorOccured) {
+                        store.value.user = auth.currentUser;
+                        router.push("/");
+                    }
+                } catch (err: any) {
+                    registerErrorMsg.value = err;
+                }
             };
 
             return {

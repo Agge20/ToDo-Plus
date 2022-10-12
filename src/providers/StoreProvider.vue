@@ -1,10 +1,14 @@
 <template>
-    <slot />
+    <slot v-if="authIsReady" />
 </template>
 
 <script lang="ts">
     import { defineComponent, provide, ref, watchEffect } from "vue";
     import StoreKey from "../symbols/StoreSymbol";
+
+    // firebase
+    import { onAuthStateChanged } from "firebase/auth";
+    import { auth } from "../firebase/firebase";
 
     // types and interfaces
     import type Store from "../interfaces/Store";
@@ -15,11 +19,19 @@
                 user: {},
             });
 
+            const authIsReady = ref<boolean>(false);
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    store.value.user = user;
+                    authIsReady.value = true;
+                }
+            });
             provide(StoreKey, store);
 
-            watchEffect(() => {
-                console.log("Store value changed: ", store);
-            });
+            return {
+                authIsReady,
+            };
         },
     });
 </script>
