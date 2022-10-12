@@ -9,7 +9,9 @@
         <gradient />
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
         <store-provider>
-            <router-view class="relative z-20" />
+            <div class="mx-auto max-w-screen-xl">
+                <router-view class="relative z-20" />
+            </div>
         </store-provider>
     </main>
 </template>
