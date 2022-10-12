@@ -50,6 +50,8 @@
 <script lang="ts">
     // firebase imports
     import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+    import type { User } from "firebase/auth";
+
     import { auth } from "../../firebase/firebase";
 
     // vue imports
@@ -141,25 +143,25 @@
                 try {
                     let errorOccured = false;
                     await createUserWithEmailAndPassword(auth, email.value, password.value).catch(
-                        (err) => {
+                        (err: any) => {
                             errorOccured = true;
                             registerErrorMsg.value = err;
                         }
                     );
 
-                    await updateProfile(auth.currentUser, { displayName: username.value }).catch(
-                        (err) => {
-                            errorOccured = true;
-                            registerErrorMsg.value = err;
-                        }
-                    );
+                    await updateProfile(auth.currentUser as User, {
+                        displayName: username.value,
+                    }).catch((err: any) => {
+                        errorOccured = true;
+                        registerErrorMsg.value = err;
+                    });
 
                     if (!errorOccured) {
                         store.value.user = auth.currentUser;
-                        console.log("New user registered: ", store.value.user.displayName);
+                        router.push("/");
                     }
-                } catch (err) {
-                    (err) => (registerErrorMsg.value = err);
+                } catch (err: any) {
+                    registerErrorMsg.value = err;
                 }
             };
 

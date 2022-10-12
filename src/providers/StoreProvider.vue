@@ -1,5 +1,5 @@
 <template>
-    <slot />
+    <slot v-if="authIsReady" />
 </template>
 
 <script lang="ts">
@@ -19,17 +19,19 @@
                 user: {},
             });
 
+            const authIsReady = ref<boolean>(false);
+
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     store.value.user = user;
-                    console.log("here is the new user: ", store.value.user.currentUser);
+                    authIsReady.value = true;
                 }
             });
             provide(StoreKey, store);
 
-            watchEffect(() => {
-                console.log("Store value changed: ", store.value.user);
-            });
+            return {
+                authIsReady,
+            };
         },
     });
 </script>
