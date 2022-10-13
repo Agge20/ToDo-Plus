@@ -1,8 +1,6 @@
 <template>
     <!-- register view -->
-    <section
-        class="duration-750 flex min-h-screen flex-col items-center justify-center p-6 lg:items-start"
-    >
+    <section :class="[sectionClass]">
         <header class="duration-750 animate-in zoom-in">
             <heading :text="'Welcome.'" :size="'h2'" :colorLight="true" />
             <heading
@@ -32,6 +30,12 @@
     import Register from "../components/login-and-register/Register.vue";
     import ColoredButton from "../components/buttons/ColoredButton.vue";
 
+    // composables
+    import injectStrict from "../composables/injectStrict";
+
+    // types and interfaces
+    import StoreKey from "../symbols/StoreSymbol";
+
     export default defineComponent({
         components: {
             Heading,
@@ -40,9 +44,10 @@
         },
         setup() {
             const router = useRouter();
-
             const email = ref<string>("");
             const password = ref<string>("");
+            const store = injectStrict(StoreKey);
+            const sectionClass = ref<string>(store.value.classes.sectionClass);
 
             const goToLogin = (): void => {
                 router.push("/login");
@@ -52,6 +57,7 @@
                 email,
                 password,
                 goToLogin,
+                sectionClass,
             };
         },
     });

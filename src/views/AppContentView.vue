@@ -1,7 +1,7 @@
 <template>
     <div class="mx-auto max-w-5xl">
         <logout-button v-if="user" />
-        <router-view class="relative z-20" />
+        <router-view class="relative" />
     </div>
 </template>
 

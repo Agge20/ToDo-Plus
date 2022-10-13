@@ -17,6 +17,10 @@
         setup() {
             const store = ref<Store>({
                 user: {},
+                classes: {
+                    sectionClass:
+                        "flex min-h-screen w-full flex-col items-center justify-center p-6 lg:items-start",
+                },
             });
 
             const authIsReady = ref<boolean>(false);
