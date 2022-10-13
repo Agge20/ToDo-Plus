@@ -1,6 +1,10 @@
 <template>
-    <heading :text="username" :size="'h2'" :colorLight="true" />
-    <heading :text="'This is your board'" :size="'h3'" :colorLight="true" />
+    <transition name="welcome">
+        <header v-if="showWelcome" class="duration-1000 animate-in fade-in zoom-in">
+            <heading :text="username" :size="'h2'" :colorLight="true" />
+            <heading :text="'This is your board.'" :size="'h3'" :colorLight="true" />
+        </header>
+    </transition>
 </template>
 
 <script lang="ts">
@@ -16,6 +20,10 @@
                 required: true,
                 type: String as PropType<string>,
             },
+            showWelcome: {
+                requried: true,
+                type: Boolean as PropType<Boolean>,
+            },
         },
         components: {
             Heading,
@@ -29,3 +37,11 @@
         },
     });
 </script>
+
+<style>
+    @import url("../../assets/css/tailwind.css");
+
+    .welcome-leave-active {
+        @apply opacity-0 transition delay-150 ease-in-out;
+    }
+</style>

@@ -1,8 +1,6 @@
 <template>
     <!-- Login view -->
-    <section
-        class="duration-750 flex min-h-screen w-full flex-col items-center justify-center p-6 lg:items-start"
-    >
+    <section :class="[sectionClass]">
         <header class="duration-750 animate-in zoom-in">
             <heading :text="'Hello.'" :size="'h2'" :color-light="true" />
             <heading :text="'Please sign in to see your board.'" :size="'h3'" :colorLight="true" />
@@ -32,6 +30,12 @@
     import Login from "../components/login-and-register/Login.vue";
     import ColoredButton from "../components/buttons/ColoredButton.vue";
 
+    // composables
+    import injectStrict from "../composables/injectStrict";
+
+    // types and interfaces
+    import StoreKey from "../symbols/StoreSymbol";
+
     export default defineComponent({
         components: {
             Heading,
@@ -40,6 +44,8 @@
         },
         setup() {
             const router = useRouter();
+            const store = injectStrict(StoreKey);
+            const sectionClass = ref<string>(store.value.classes.sectionClass);
 
             const email = ref<string>("");
             const password = ref<string>("");
@@ -63,6 +69,7 @@
                 password,
                 googleSignIn,
                 goToRegister,
+                sectionClass,
             };
         },
     });
