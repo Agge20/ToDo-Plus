@@ -1,7 +1,9 @@
 <template>
-    <!-- login view -->
-    <section class="flex min-h-screen flex-col items-center justify-center p-6 lg:items-start">
-        <header>
+    <!-- register view -->
+    <section
+        class="duration-750 flex min-h-screen flex-col items-center justify-center p-6 lg:items-start"
+    >
+        <header class="duration-750 animate-in zoom-in">
             <heading :text="'Welcome'" :size="'h2'" :colorLight="true" />
             <heading
                 :text="'Please register a new account below'"
@@ -9,7 +11,7 @@
                 :colorLight="true"
             />
         </header>
-        <div class="flex flex-col lg:flex-row-reverse">
+        <div class="flex flex-col animate-in fade-in-75 slide-in-from-left lg:flex-row-reverse">
             <register />
             <div
                 class="max-w-screen flex min-h-full w-full max-w-md items-center justify-center rounded-2xl bg-white bg-opacity-20 px-4 drop-shadow-lg backdrop-blur-lg lg:my-8 lg:w-96 lg:rounded-br-none lg:rounded-tr-none"

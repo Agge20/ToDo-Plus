@@ -1,14 +1,14 @@
 <template>
     <!-- Login view -->
     <section
-        class="flex min-h-screen w-full flex-col items-center justify-center p-6 lg:items-start"
+        class="duration-750 flex min-h-screen w-full flex-col items-center justify-center p-6 lg:items-start"
     >
-        <header>
+        <header class="duration-750 animate-in zoom-in">
             <heading :text="'Hello.'" :size="'h2'" :color-light="true" />
             <heading :text="'Please sign in to see your board.'" :size="'h3'" :colorLight="true" />
         </header>
 
-        <div class="flex flex-col lg:flex-row">
+        <div class="flex flex-col animate-in fade-in-75 slide-in-from-right lg:flex-row">
             <login />
             <div
                 class="max-w-screen flex min-h-full w-full max-w-md items-center justify-center rounded-2xl bg-white bg-opacity-20 px-4 drop-shadow-lg backdrop-blur-lg lg:my-8 lg:w-full lg:rounded-tl-none lg:rounded-bl-none"

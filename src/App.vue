@@ -7,11 +7,10 @@
         ref="mainWrapper"
     >
         <gradient />
+
         <error v-if="natureImage.errorMessage" :message="natureImage.errorMessage" />
         <store-provider>
-            <div class="mx-auto max-w-5xl">
-                <router-view class="relative z-20" />
-            </div>
+            <app-content-view />
         </store-provider>
     </main>
 </template>
@@ -20,7 +19,7 @@
     // vue imports
     import { defineComponent, ref, onMounted, watchEffect } from "vue";
 
-    // types
+    // types and interfaces
     import type NatureImage from "./interfaces/NatureImage";
 
     // providers
@@ -33,6 +32,7 @@
 
     // views
     import LoginView from "./views/LoginView.vue";
+    import AppContentView from "./views/AppContentView.vue";
 
     export default defineComponent({
         name: "App",
@@ -42,6 +42,7 @@
             LoginView,
             Gradient,
             StoreProvider,
+            AppContentView,
         },
         setup() {
             // refs
@@ -50,8 +51,8 @@
                 imageUrl: "",
             });
 
-            const mainWrapper = ref();
-            const isLoading = ref(true);
+            const mainWrapper = ref<HTMLElement>();
+            const isLoading = ref<boolean>(true);
 
             // when component is mounted fetch and store the nature image url
             onMounted(() => {
