@@ -4,9 +4,9 @@
         class="duration-750 flex min-h-screen flex-col items-center justify-center p-6 lg:items-start"
     >
         <header class="duration-750 animate-in zoom-in">
-            <heading :text="'Welcome'" :size="'h2'" :colorLight="true" />
+            <heading :text="'Welcome.'" :size="'h2'" :colorLight="true" />
             <heading
-                :text="'Please register a new account below'"
+                :text="'Please register a new account below.'"
                 :size="'h3'"
                 :colorLight="true"
             />

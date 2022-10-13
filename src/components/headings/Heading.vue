@@ -51,7 +51,7 @@
                     headingSize.value = "md:text-9xl text-6xl";
                     break;
                 case "h2":
-                    headingSize.value = "md:text-8xl text-4xl";
+                    headingSize.value = "md:text-8xl text-4xl font-semibold";
                     break;
                 case "h3":
                     headingSize.value = "md:text-6xl text-3xl";
