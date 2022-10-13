@@ -3,7 +3,6 @@
     <section
         class="flex min-h-screen w-full flex-col items-center justify-center p-6 lg:items-start"
     >
-        <div></div>
         <header>
             <heading :text="'Hello.'" :size="'h2'" :color-light="true" />
             <heading :text="'Please sign in to see your board.'" :size="'h3'" :colorLight="true" />
