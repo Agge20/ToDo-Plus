@@ -1,6 +1,6 @@
 <template>
     <!-- register -->
-    <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8">
+    <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8 lg:rounded-tl-none lg:rounded-bl-none">
         <heading :text="'Register'" :size="'h4'" :colorLight="false" />
         <form class="flex flex-col" @submit.prevent="registerUser">
             <form-label :text="'Email'" :forId="'register-email'" />
@@ -34,8 +34,9 @@
                 id="register-repeat-password"
                 @input-value-change="(val) => inputValueChange(val, 'repeated-password')"
             />
-            <green-button
+            <colored-button
                 :text="'Register'"
+                :color="'green'"
                 :disabled="!correctValuesInputed"
                 :class="{
                     'opacity-50': !correctValuesInputed,
@@ -68,18 +69,19 @@
     import FormLabel from "../form/FormLabel.vue";
     import FormInput from "../form/FormInput.vue";
     import Heading from "../headings/Heading.vue";
-    import GreenButton from "../buttons/GreenButton.vue";
+    import ColoredButton from "../buttons/ColoredButton.vue";
 
     export default defineComponent({
         components: {
             FormLabel,
             FormInput,
             Heading,
-            GreenButton,
+            ColoredButton,
         },
         setup() {
             // vue router
             const router = useRouter();
+          
             const store = injectStrict(StoreKey);
 
             const email = ref<string>("");

@@ -4,6 +4,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                "ct-blue": "#3B61E5",
                 "ct-yellow": "#F5CB34",
                 "ct-green": "#5CBC65",
                 "ct-red": "#EA3939",
@@ -34,5 +35,5 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [require("tailwindcss-animate")],
 };

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, provide, ref, watchEffect } from "vue";
+    import { defineComponent, provide, ref } from "vue";
     import StoreKey from "../symbols/StoreSymbol";
 
     // firebase
@@ -25,12 +25,20 @@
                 if (user) {
                     store.value.user = user;
                     authIsReady.value = true;
+                } else {
+                    store.value.user = null;
+                    authIsReady.value = true;
                 }
             });
             provide(StoreKey, store);
 
+            const lorem = () => {
+                console.log("lorem...");
+            };
+
             return {
                 authIsReady,
+                lorem,
             };
         },
     });
