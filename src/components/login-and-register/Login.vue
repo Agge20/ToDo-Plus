@@ -1,7 +1,7 @@
 <template>
     <!-- login -->
     <div class="my-8 max-w-90vw rounded-2xl bg-ct-white p-8 lg:rounded-tr-none lg:rounded-br-none">
-        <heading :text="'login'" :size="'h4'" :colorLight="false" />
+        <heading :text="'Login'" :size="'h4'" :colorLight="false" />
         <form class="flex flex-col" @submit.prevent="loginUser">
             <form-label :text="'Email'" :forId="'login-email'" />
             <form-input
@@ -11,28 +11,12 @@
                 id="login-email"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
-            <form-label :text="'Username'" :forId="'login-username'" />
-            <form-input
-                :inputType="'user'"
-                :icon="'user'"
-                :errorMessage="loginErrorMsg"
-                id="login-username"
-                @input-value-change="(val) => inputValueChange(val, 'username')"
-            />
             <form-label :text="'Password'" :forId="'login-password'" />
             <form-input
                 :inputType="'password'"
                 :icon="'lock'"
                 id="login-password"
                 @input-value-change="(val) => inputValueChange(val, 'password')"
-            />
-            <form-label :text="'Repeat Password'" :forId="'login-repeat-password'" />
-            <form-input
-                :inputType="'password'"
-                :icon="'lock'"
-                :errorMessage="passwordNotMatchingMsg"
-                id="login-repeat-password"
-                @input-value-change="(val) => inputValueChange(val, 'repeated-password')"
             />
             <colored-button
                 :text="'Login'"
@@ -50,7 +34,7 @@
 
 <script lang="ts">
     // firebase imports
-    import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+    import { signInWithEmailAndPassword } from "firebase/auth";
     import type { User } from "firebase/auth";
 
     import { auth } from "../../firebase/firebase";
@@ -84,37 +68,25 @@
             const store = injectStrict(StoreKey);
 
             const email = ref<string>("");
-            const username = ref<string>("");
             const password = ref<string>("");
-            const repeatedPassword = ref<string>("");
-            const passwordNotMatchingMsg = ref<string>("");
             const correctValuesInputed = ref<boolean>(false);
             const loginErrorMsg = ref<string>("");
 
-            const passwordsAreMatching = computed(() => {
-                return (
-                    repeatedPassword.value === password.value &&
-                    repeatedPassword.value.length > 0 &&
-                    password.value.length > 0
-                );
-            });
-
             const checkInputedValues = computed(() => {
-                if (passwordsAreMatching.value) {
-                    return email.value.includes("@") && email.value.length > 2;
+                if (email.value) {
+                    return (
+                        email.value.includes("@") &&
+                        email.value.length > 2 &&
+                        password.value.length > 1
+                    );
                 }
                 return false;
             });
 
             watchEffect(() => {
-                if (!passwordsAreMatching.value && repeatedPassword.value.length > 0) {
-                    passwordNotMatchingMsg.value = "Password not matching";
-                    correctValuesInputed.value = false;
-                } else if (checkInputedValues.value) {
-                    passwordNotMatchingMsg.value = "";
+                if (checkInputedValues.value) {
                     correctValuesInputed.value = true;
                 } else {
-                    passwordNotMatchingMsg.value = "";
                     correctValuesInputed.value = false;
                 }
             });
@@ -128,46 +100,25 @@
                     case "email":
                         email.value = val;
                         break;
-                    case "username":
-                        username.value = val;
-                        break;
                     case "password":
                         password.value = val;
-                        break;
-                    case "repeated-password":
-                        repeatedPassword.value = val;
                         break;
                 }
             };
 
             const loginUser = async () => {
-                try {
-                    let errorOccured = false;
-                    await createUserWithEmailAndPassword(auth, email.value, password.value).catch(
-                        (err: any) => {
-                            errorOccured = true;
-                            loginErrorMsg.value = err;
-                        }
-                    );
-
-                    await updateProfile(auth.currentUser as User, {
-                        displayName: username.value,
-                    }).catch((err: any) => {
-                        errorOccured = true;
-                        loginErrorMsg.value = err;
-                    });
-
-                    if (!errorOccured) {
-                        store.value.user = auth.currentUser;
+                signInWithEmailAndPassword(auth, email.value, password.value)
+                    .then((userCredential) => {
+                        // Signed in
+                        store.value.user = userCredential.user;
                         router.push("/");
-                    }
-                } catch (err: any) {
-                    loginErrorMsg.value = err;
-                }
+                    })
+                    .catch((error) => {
+                        loginErrorMsg.value = error;
+                    });
             };
 
             return {
-                passwordNotMatchingMsg,
                 inputValueChange,
                 correctValuesInputed,
                 loginUser,
