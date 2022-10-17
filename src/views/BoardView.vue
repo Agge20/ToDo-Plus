@@ -1,8 +1,8 @@
 <template>
-    <section :class="[sectionClass]">
+    <content-section>
         <welcome :username="username" :show-welcome="showWelcome" />
         <todos v-if="showTodos" />
-    </section>
+    </content-section>
 </template>
 
 <script lang="ts">
@@ -20,16 +20,16 @@
     import StoreKey from "../symbols/StoreSymbol";
 
     // components
+    import ContentSection from "../components/ContentSection.vue";
     import Welcome from "../components/board/Welcome.vue";
     import Todos from "../components/board/Todos.vue";
 
     export default defineComponent({
-        components: { Welcome, Todos },
+        components: { ContentSection, Welcome, Todos },
         setup() {
             const store = injectStrict(StoreKey);
 
             const user = ref<Auth>(auth);
-            const sectionClass = ref<string>(store.value.classes.sectionClass);
             let username = ref<string>("");
 
             // animation varibales
@@ -63,7 +63,6 @@
                 store,
                 showWelcome,
                 showTodos,
-                sectionClass,
             };
         },
     });

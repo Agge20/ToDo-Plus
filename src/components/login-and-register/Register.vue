@@ -81,7 +81,7 @@
         setup() {
             // vue router
             const router = useRouter();
-          
+
             const store = injectStrict(StoreKey);
 
             const email = ref<string>("");

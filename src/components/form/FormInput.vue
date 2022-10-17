@@ -39,8 +39,8 @@
             errorMessage: {
                 type: String as PropType<string>,
             },
+
             icon: {
-                required: true,
                 type: String as PropType<FormInputIcon>,
             },
             inputType: {
