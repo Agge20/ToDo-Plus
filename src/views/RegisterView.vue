@@ -1,6 +1,6 @@
 <template>
     <!-- register view -->
-    <section :class="[sectionClass]">
+    <content-section>
         <header class="duration-750 animate-in zoom-in">
             <heading :text="'Welcome.'" :size="'h2'" :colorLight="true" />
             <heading
@@ -9,7 +9,9 @@
                 :colorLight="true"
             />
         </header>
-        <div class="flex flex-col animate-in fade-in-75 slide-in-from-left lg:flex-row-reverse">
+        <div
+            class="flex flex-col justify-end animate-in fade-in-75 slide-in-from-left lg:flex-row-reverse"
+        >
             <register />
             <div
                 class="max-w-screen flex min-h-full w-full max-w-md items-center justify-center rounded-2xl bg-white bg-opacity-20 px-4 drop-shadow-lg backdrop-blur-lg lg:my-8 lg:w-96 lg:rounded-br-none lg:rounded-tr-none"
@@ -17,7 +19,7 @@
                 <colored-button :text="'Login'" :color="'blue'" @click="goToLogin" />
             </div>
         </div>
-    </section>
+    </content-section>
 </template>
 
 <script lang="ts">
@@ -26,6 +28,7 @@
     import { useRouter } from "vue-router";
 
     // components
+    import ContentSection from "../components/ContentSection.vue";
     import Heading from "../components/headings/Heading.vue";
     import Register from "../components/login-and-register/Register.vue";
     import ColoredButton from "../components/buttons/ColoredButton.vue";
@@ -41,13 +44,13 @@
             Heading,
             Register,
             ColoredButton,
+            ContentSection,
         },
         setup() {
             const router = useRouter();
             const email = ref<string>("");
             const password = ref<string>("");
             const store = injectStrict(StoreKey);
-            const sectionClass = ref<string>(store.value.classes.sectionClass);
 
             const goToLogin = (): void => {
                 router.push("/login");
@@ -57,7 +60,6 @@
                 email,
                 password,
                 goToLogin,
-                sectionClass,
             };
         },
     });
