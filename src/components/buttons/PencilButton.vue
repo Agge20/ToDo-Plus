@@ -1,5 +1,5 @@
 <template>
-    <button class="rounded-xl bg-ct-white p-2 opacity-80">
+    <button class="rounded-xl bg-ct-white p-2 opacity-80 hover:opacity-60">
         <pencil-square-icon />
     </button>
 </template>
