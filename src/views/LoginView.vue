@@ -29,7 +29,7 @@
     import Heading from "../components/headings/Heading.vue";
     import Login from "../components/login-and-register/Login.vue";
     import ColoredButton from "../components/buttons/ColoredButton.vue";
-    import ContentSection from "../components/ContentSection.vue";
+    import ContentSection from "../components/slots/ContentSection.vue";
 
     // composables
     import injectStrict from "../composables/injectStrict";

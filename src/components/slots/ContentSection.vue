@@ -1,5 +1,7 @@
 <template>
-    <section class="flex min-h-screen max-w-90vw flex-col items-center rounded-2xl py-16">
+    <section
+        class="flex min-h-screen max-w-90vw flex-col items-center justify-center rounded-2xl py-16"
+    >
         <slot />
     </section>
 </template>

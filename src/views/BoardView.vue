@@ -20,7 +20,7 @@
     import StoreKey from "../symbols/StoreSymbol";
 
     // components
-    import ContentSection from "../components/ContentSection.vue";
+    import ContentSection from "../components/slots/ContentSection.vue";
     import Welcome from "../components/board/Welcome.vue";
     import Todos from "../components/board/Todos.vue";
 
