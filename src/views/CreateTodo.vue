@@ -9,7 +9,7 @@
     import { defineComponent } from "vue";
 
     // components
-    import ContentSection from "../components/ContentSection.vue";
+    import ContentSection from "../components/slots/ContentSection.vue";
     import CreateTodo from "../components/board/CreateTodo.vue";
 
     export default defineComponent({

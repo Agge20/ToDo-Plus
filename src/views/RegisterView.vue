@@ -28,7 +28,7 @@
     import { useRouter } from "vue-router";
 
     // components
-    import ContentSection from "../components/ContentSection.vue";
+    import ContentSection from "../components/slots/ContentSection.vue";
     import Heading from "../components/headings/Heading.vue";
     import Register from "../components/login-and-register/Register.vue";
     import ColoredButton from "../components/buttons/ColoredButton.vue";
