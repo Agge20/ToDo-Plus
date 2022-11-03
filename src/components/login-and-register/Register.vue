@@ -8,7 +8,7 @@
                 :inputType="'email'"
                 :icon="'email'"
                 :errorMessage="registerErrorMsg"
-                id="register-email"
+                :id="'register-email'"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
             <form-label :text="'Username'" :forId="'register-username'" />
@@ -16,14 +16,14 @@
                 :inputType="'user'"
                 :icon="'user'"
                 :errorMessage="registerErrorMsg"
-                id="register-username"
+                :id="'register-username'"
                 @input-value-change="(val) => inputValueChange(val, 'username')"
             />
             <form-label :text="'Password'" :forId="'register-password'" />
             <form-input
                 :inputType="'password'"
                 :icon="'lock'"
-                id="register-password"
+                :id="'register-password'"
                 @input-value-change="(val) => inputValueChange(val, 'password')"
             />
             <form-label :text="'Repeat Password'" :forId="'register-repeat-password'" />
@@ -31,7 +31,7 @@
                 :inputType="'password'"
                 :icon="'lock'"
                 :errorMessage="passwordNotMatchingMsg"
-                id="register-repeat-password"
+                :id="'register-repeat-password'"
                 @input-value-change="(val) => inputValueChange(val, 'repeated-password')"
             />
             <colored-button

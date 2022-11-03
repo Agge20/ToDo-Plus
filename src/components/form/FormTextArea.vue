@@ -1,22 +1,36 @@
 <template>
     <!-- form textarea  -->
-    <textarea name="" id=""></textarea>
+    <textarea
+        :id="id"
+        :name="name"
+        class="w-80 max-w-full rounded-lg border-2 bg-ct-light-gray p-2 focus:outline-none"
+        rows="5"
+        v-model="textareaValue"
+        @change="$emit('inputValueChange', textareaValue)"
+    ></textarea>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, ref } from "vue";
     import type { PropType } from "vue";
 
     export default defineComponent({
         props: {
-            text: {
+            id: {
                 required: true,
                 type: String as PropType<string>,
             },
-            forId: {
+            name: {
                 required: true,
                 type: String as PropType<string>,
             },
+        },
+        setup() {
+            const textareaValue = ref<string>("");
+
+            return {
+                textareaValue,
+            };
         },
     });
 </script>

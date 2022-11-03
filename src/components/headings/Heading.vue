@@ -1,21 +1,25 @@
 <template>
-    <!-- Header three component -->
-    <h1 v-if="size === 'h1'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <!-- Heading component -->
+    <h1 v-if="size === 'h1'" class="m-4 ml-0 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h1>
-    <h2 v-else-if="size === 'h2'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <h2 v-else-if="size === 'h2'" class="m-4 ml-0 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h2>
-    <h3 v-else-if="size === 'h3'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <h3
+        v-else-if="size === 'h3'"
+        class="m-4 ml-0 font-semibold text-ct-white"
+        :class="[headingClasses]"
+    >
         {{ text }}
     </h3>
-    <h4 v-else-if="size === 'h4'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <h4 v-else-if="size === 'h4'" class="m-4 ml-0 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h4>
-    <h5 v-else-if="size === 'h5'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <h5 v-else-if="size === 'h5'" class="m-4 ml-0 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h5>
-    <h6 v-else-if="size === 'h6'" class="m-4 text-ct-white" :class="[headingClasses]">
+    <h6 v-else-if="size === 'h6'" class="m-4 ml-0 text-ct-white" :class="[headingClasses]">
         {{ text }}
     </h6>
 </template>

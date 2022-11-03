@@ -7,8 +7,10 @@
             <user-icon v-if="icon === 'user'" class="absolute left-2" />
             <input
                 :type="inputType"
-                class="w-80 max-w-full rounded-lg border-2 bg-ct-light-gray p-2 indent-7 focus:outline-none"
+                :id="id"
+                class="w-80 max-w-full rounded-lg border-2 bg-ct-light-gray p-2 focus:outline-none"
                 :class="{
+                    'indent-7': icon,
                     'border-2 border-ct-red': errorMessage,
                 }"
                 v-model="inputValue"
@@ -36,10 +38,13 @@
 
     export default defineComponent({
         props: {
+            id: {
+                required: true,
+                type: String as PropType<string>,
+            },
             errorMessage: {
                 type: String as PropType<string>,
             },
-
             icon: {
                 type: String as PropType<FormInputIcon>,
             },
