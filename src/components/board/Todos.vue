@@ -5,7 +5,7 @@
                 <heading :text="'To Do.'" :size="'h2'" :colorLight="true" />
                 <div>
                     <checked-button class="mx-2 mb-4" />
-                    <pencil-button class="mb-4" />
+                    <pencil-button class="mb-4" @click="() => router.push('/create-todo')" />
                 </div>
             </header>
             <div></div>
@@ -16,6 +16,7 @@
 <script lang="ts">
     // vue imports
     import { defineComponent } from "vue";
+    import { useRouter } from "vue-router";
 
     // components
     import Heading from "../headings/Heading.vue";
@@ -27,6 +28,13 @@
             Heading,
             CheckedButton,
             PencilButton,
+        },
+        setup() {
+            const router = useRouter();
+
+            return {
+                router,
+            };
         },
     });
 </script>

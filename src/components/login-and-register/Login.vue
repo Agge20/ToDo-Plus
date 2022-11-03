@@ -8,7 +8,7 @@
                 :inputType="'email'"
                 :icon="'email'"
                 :errorMessage="loginErrorMsg"
-                id="login-email"
+                :id="'login-email'"
                 @input-value-change="(val) => inputValueChange(val, 'email')"
             />
             <form-label :text="'Password'" :forId="'login-password'" />

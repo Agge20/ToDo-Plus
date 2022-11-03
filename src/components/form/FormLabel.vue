@@ -1,6 +1,6 @@
 <template>
     <!-- form label  -->
-    <label :for="forId" class="mt-4 font-inter text-xl font-light">{{ text }}</label>
+    <label :for="forId" class="mt-4 block font-inter text-xl font-light">{{ text }}</label>
 </template>
 
 <script lang="ts">
