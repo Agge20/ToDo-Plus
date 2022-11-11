@@ -14,12 +14,17 @@
             :id="'create-todo-description'"
             :name="'create-todo-description'"
         />
+        <datepicker v-model="date" class="mt-4" />
     </form>
 </template>
 
 <script lang="ts">
     // vue imports
-    import { defineComponent, ref } from "vue";
+    import { defineComponent, ref, watchEffect } from "vue";
+
+    // module imports
+    import Datepicker from "@vuepic/vue-datepicker";
+    import "@vuepic/vue-datepicker/dist/main.css";
 
     // components
     import Heading from "../headings/Heading.vue";
@@ -33,10 +38,12 @@
             FormInput,
             FormLabel,
             FormTextArea,
+            Datepicker,
         },
         setup() {
             const todoTitle = ref<string>("");
             const todoDesc = ref<string>("");
+            const date = ref<Date>();
 
             // handle input value changes
             const inputValueChange = (
@@ -53,8 +60,13 @@
                 }
             };
 
+            watchEffect(() => {
+                console.log("date:", date.value);
+            });
+
             return {
                 inputValueChange,
+                date,
             };
         },
     });
