@@ -1,5 +1,7 @@
 <template>
-    <button class="rounded-xl bg-ct-green p-2 opacity-80 hover:opacity-60">
+    <button
+        class="rounded-xl bg-ct-green p-2 opacity-80 hover:animate-grow hover:opacity-60 hover:shadow-lg"
+    >
         <checked-circle-icon />
     </button>
 </template>
