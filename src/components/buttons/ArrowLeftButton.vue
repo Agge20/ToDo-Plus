@@ -1,6 +1,6 @@
 <template>
     <button
-        class="flex items-center rounded-lg bg-ct-yellow p-4 text-xl text-ct-white opacity-90 shadow-lg"
+        class="flex items-center rounded-lg bg-ct-yellow p-4 text-xl text-ct-white opacity-90 shadow-lg hover:animate-grow hover:shadow-lg"
     >
         <arrow-left-icon class="mr-2" />
         {{ text }}
