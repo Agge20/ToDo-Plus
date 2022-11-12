@@ -1,6 +1,6 @@
 <template>
     <!-- error popup component -->
-    <div class="flex items-center justify-center p-8">
+    <div class="absolute top-2 flex items-center justify-center p-8">
         <p class="animate-expand rounded-2xl bg-ct-red p-8 text-ct-white">{{ message }}</p>
     </div>
 </template>
@@ -16,6 +16,5 @@
                 type: String as PropType<string>,
             },
         },
-        setup() {},
     });
 </script>
