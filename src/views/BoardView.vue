@@ -46,7 +46,6 @@
                         showTodos.value = true;
                     }, 2000);
                 } else {
-                    console.log("else rann...");
                     setTimeout(() => {
                         showWelcome.value = false;
                     }, 2000);
