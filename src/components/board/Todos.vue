@@ -8,15 +8,26 @@
                     <pencil-button class="mb-4" @click="() => router.push('/create-todo')" />
                 </div>
             </header>
-            <div></div>
+            <div v-if="todos">
+                <p v-for="todo in todos">
+                    {{ todo.title }}
+                </p>
+            </div>
         </div>
     </transition>
 </template>
 
 <script lang="ts">
     // vue imports
-    import { defineComponent } from "vue";
+    import { defineComponent, onBeforeMount, onUnmounted, ref } from "vue";
     import { useRouter } from "vue-router";
+
+    // firebase
+    import { collection, query, onSnapshot } from "firebase/firestore";
+    import { db, auth } from "../../firebase/firebase";
+
+    // interfaces
+    import type Todo from "../../interfaces/Todo";
 
     // components
     import Heading from "../headings/Heading.vue";
@@ -31,9 +42,31 @@
         },
         setup() {
             const router = useRouter();
+            const todos = ref<Array<Todo>>([]);
+            let unsubscribeTodos: Function;
+
+            // fetch todos before component is mounted
+            onBeforeMount(() => {
+                // if user is logged in
+                if (auth.currentUser && auth.currentUser.uid) {
+                    const q = query(collection(db, auth.currentUser.uid));
+                    unsubscribeTodos = onSnapshot(q, (querySnapshot) => {
+                        todos.value = [];
+                        querySnapshot.forEach((doc) => {
+                            todos.value.push(doc.data() as Todo);
+                        });
+                    });
+                }
+            });
+
+            onUnmounted(() => {
+                unsubscribeTodos();
+                console.log("unMounted ran...");
+            });
 
             return {
                 router,
+                todos,
             };
         },
     });
